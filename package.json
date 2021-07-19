@@ -1,0 +1,30 @@
+{
+  "name": "stock-checker",
+  "version": "1.0.0",
+  "description": "CLI that checks for stock of a specific product",
+  "main": "bin/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matigastirami/stock-checker.git"
+  },
+  "keywords": [
+    "cli",
+    "args"
+  ],
+  "author": "mramirez,amendez,eallio,tpais",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/matigastirami/stock-checker/issues"
+  },
+  "homepage": "https://github.com/matigastirami/stock-checker#readme",
+  "bin": {
+    "stock-checker": "./bin/index.js"
+  },
+  "dependencies": {
+    "puppeteer": "^10.1.0",
+    "yargs": "^17.0.1"
+  }
+}
