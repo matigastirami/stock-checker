@@ -1,5 +1,3 @@
-const parseArgs = require('./parse-args');
+import argvObject from "./args-parser.js";
 
-module.exports = {
-    parseArgs
-}
+export { argvObject };
