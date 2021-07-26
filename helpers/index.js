@@ -1,5 +1,4 @@
-const parseArgs = require('./parse-args');
+import argvObject from "./args-parser.js";
+import getElementInPageBySelector from "./navigator.js";
 
-module.exports = {
-    parseArgs
-}
+export { argvObject, getElementInPageBySelector };
