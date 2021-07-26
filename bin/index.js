@@ -6,7 +6,7 @@ const { p, s } = argvObject;
 
 const navigate = async (url, selector) => {
   const browser = await puppeteer.launch({
-    headless: false,
+    headless: true,
     defaultViewport: null,
     args: ["--start-maximized"],
   });
@@ -20,15 +20,15 @@ const navigate = async (url, selector) => {
 const getFirstNumberInText = (text) => {
   let rg = new RegExp("\\d+", "gi");
   let result = rg.exec(text);
-  return Number(result[0]) !== 0;
+  return Number(result[0]);
 };
 
 const checkStock = async () => {
   const result = await navigate(p, s);
 
-  let availableStock = getFirstNumberInText(result);
+  let isStockAvailable = getFirstNumberInText(result) !== 0;
 
-  if (availableStock) {
+  if (isStockAvailable) {
     console.log("Available stock");
   } else {
     console.log("No stock");
