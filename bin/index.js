@@ -31,8 +31,7 @@ const checkForStock = (text) => {
 
   if (availableStock) {
     console.log("Available stock");
-    return;
+  } else {
+    console.log("No stock");
   }
-
-  console.log("No stock");
 })();
