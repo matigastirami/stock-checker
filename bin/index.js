@@ -23,16 +23,19 @@ const getFirstNumberInText = (text) => {
   return Number(result[0]);
 };
 
-const checkStock = async () => {
+const getStock = () => {
   const result = await navigate(p, s);
+  return getFirstNumberInText(result);
+};
 
-  let isStockAvailable = getFirstNumberInText(result) !== 0;
+const showStockStatus = async () => {
+  let stock = getStock();
 
-  if (isStockAvailable) {
+  if (stock > 0) {
     console.log("Available stock");
   } else {
     console.log("No stock");
   }
 };
 
-checkStock();
+showStockStatus();
