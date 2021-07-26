@@ -17,20 +17,22 @@ const navigate = async (url, selector) => {
   return found;
 };
 
-const checkForStock = (text) => {
+const getFirstNumberInText = (text) => {
   let rg = new RegExp("\\d+", "gi");
   let result = rg.exec(text);
   return Number(result[0]) !== 0;
 };
 
-(async () => {
+const checkStock = async () => {
   const result = await navigate(p, s);
 
-  let availableStock = checkForStock(result);
+  let availableStock = getFirstNumberInText(result);
 
   if (availableStock) {
     console.log("Available stock");
   } else {
     console.log("No stock");
   }
-})();
+};
+
+checkStock();
