@@ -5,7 +5,6 @@ import puppeteer from "puppeteer";
 const { p, s } = argvObject;
 
 const navigate = async (url, selector) => {
-  console.log(url);
   const browser = await puppeteer.launch({
     headless: false,
     defaultViewport: null,
