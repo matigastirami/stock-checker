@@ -3,19 +3,6 @@ import { argvObject, getElementInPageBySelector } from "../helpers/index.js";
 
 const { p, s } = argvObject;
 
-const navigate = async (url, selector) => {
-  const browser = await puppeteer.launch({
-    headless: true,
-    defaultViewport: null,
-    args: ["--start-maximized"],
-  });
-  const page = await browser.newPage();
-  await page.goto(url);
-  let found = await page.$eval(selector, (el) => el.innerHTML);
-  browser.close();
-  return found;
-};
-
 const getFirstNumberInText = (text) => {
   let rg = new RegExp("\\d+", "gi");
   let result = rg.exec(text);
