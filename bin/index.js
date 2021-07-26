@@ -1,6 +1,5 @@
 #! /usr/bin/env node
-import { argvObject } from "../helpers/index.js";
-import puppeteer from "puppeteer";
+import { argvObject, getElementInPageBySelector } from "../helpers/index.js";
 
 const { p, s } = argvObject;
 
@@ -23,13 +22,13 @@ const getFirstNumberInText = (text) => {
   return Number(result[0]);
 };
 
-const getStock = () => {
-  const result = await navigate(p, s);
+const getStock = async () => {
+  const result = await getElementInPageBySelector(p, s);
   return getFirstNumberInText(result);
 };
 
 const showStockStatus = async () => {
-  let stock = getStock();
+  let stock = await getStock();
 
   if (stock > 0) {
     console.log("Available stock");
@@ -38,4 +37,4 @@ const showStockStatus = async () => {
   }
 };
 
-showStockStatus();
+(async () => showStockStatus())();
