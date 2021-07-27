@@ -13,6 +13,18 @@ const argvObject = yargs(process.argv.slice(2))
     type: "string",
     demandOption: true,
   })
+  .option("sch", {
+    alias: "scheduler",
+    describe: "Scheduler to check the stock (Cron format)",
+    type: "string",
+    demandOption: false,
+  })
+  .option("lmk", {
+    alias: "letMeKnow",
+    describe: "Email to notify when the stock is available",
+    type: "string",
+    demandOption: true,
+  })
   .help(true)
   .parse();
 

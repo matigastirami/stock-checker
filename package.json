@@ -24,6 +24,8 @@
     "stock-checker": "./bin/index.js"
   },
   "dependencies": {
+    "node-schedule": "^2.0.0",
+    "nodemailer": "^6.6.3",
     "puppeteer": "^10.1.0",
     "yargs": "^17.0.1"
   },
