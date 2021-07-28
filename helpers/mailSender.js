@@ -6,8 +6,8 @@ export default async function notifyByEmail(receiver, message) {
         port: 465,
         secure: true, // true for 465, false for other ports
         auth: {
-            user: "", //set email
-            pass: "", //set password
+            user: "", //TODO: set email
+            pass: "", //TODO: set password
         },
     });
 
