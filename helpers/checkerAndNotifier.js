@@ -3,20 +3,21 @@ import { scheduleJob, cancelJob } from "node-schedule";
 import notifyByEmail from "../helpers/mailSender.js";
 import { DEFAULT_CRON_STRING } from "../helpers/constants.js";
 
-const { p, s, sch, lmk } = argvObject;
-
-const getFirstNumberInText = (text) => {
+export const getFirstNumberInText = (text) => {
   let rg = new RegExp("\\d+", "gi");
   let result = rg.exec(text);
   return Number(result[0]);
 };
 
-const getStock = async () => {
+export const getStock = async () => {
+  const { p, s } = argvObject;
   const result = await getElementInPageBySelector(p, s);
   return getFirstNumberInText(result);
 };
 
 export default async function checkAndNotifyStock() {
+  const { sch, lmk } = argvObject;
+  
   const rule = sch ?? DEFAULT_CRON_STRING;
   
   scheduleJob("stockChecker", rule, async () => {

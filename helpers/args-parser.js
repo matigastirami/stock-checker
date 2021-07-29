@@ -1,6 +1,6 @@
 import yargs from "yargs";
 
-const argvObject = yargs(process.argv.slice(2))
+const argvObject = yargs()
   .option("p", {
     alias: "product",
     describe: "Product to find",
@@ -26,6 +26,6 @@ const argvObject = yargs(process.argv.slice(2))
     demandOption: true,
   })
   .help(true)
-  .parse();
+  .parse(process.argv.slice(2));
 
 export default argvObject;
