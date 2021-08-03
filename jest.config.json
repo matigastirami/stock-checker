@@ -17,5 +17,6 @@
         "/node_modules/",
         "/bin/",
         "/helpers/index.js"
-    ]
+    ],
+    "testTimeout": 20000
 }
