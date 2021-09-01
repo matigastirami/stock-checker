@@ -1,7 +1,7 @@
-import { getElementInPageBySelector } from "../helpers/index.js";
+import { getElementInPageBySelector } from "./";
 import { scheduleJob, cancelJob } from "node-schedule";
-import notifyByEmail from "../helpers/mailSender.js";
-import { DEFAULT_CRON_STRING } from "../helpers/constants.js";
+import notifyByEmail from "./mailSender.js";
+import { DEFAULT_CRON_STRING } from "./constants.js";
 
 export const getFirstNumberInText = (text) => {
   let rg = new RegExp("\\d+", "gi");

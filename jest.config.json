@@ -15,8 +15,9 @@
     },
     "testPathIgnorePatterns": [
         "/node_modules/",
-        "/bin/",
-        "/helpers/index.js"
+        "/bin/index.js",
+        "/helpers/index.js",
+        "/helpers/args-parser.js"
     ],
     "testTimeout": 20000
 }
