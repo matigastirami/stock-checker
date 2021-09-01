@@ -1,4 +1,5 @@
-import argvObject from "./args-parser.js";
+import parseArgs from "./args-parser.js";
+import { checkAndNotifyStock } from "./checkerAndNotifier.js";
 import getElementInPageBySelector from "./navigator.js";
 
-export { argvObject, getElementInPageBySelector };
+export { parseArgs, getElementInPageBySelector, checkAndNotifyStock };

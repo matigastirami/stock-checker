@@ -1,1 +1,1 @@
-export const DEFAULT_CRON_STRING = "*/5 * * * *";
+export const DEFAULT_CRON_STRING = '*/5 * * * *';

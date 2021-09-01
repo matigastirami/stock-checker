@@ -1,4 +1,4 @@
 #! /usr/bin/env node
-import checkAndNotifyStock from "../helpers/checkerAndNotifier.js";
+import { checkAndNotifyStock, parseArgs } from "../helpers/index.js";
 
-(async () => checkAndNotifyStock())();
+(async () => checkAndNotifyStock({ ...parseArgs(process.argv.slice(2)) }))();
