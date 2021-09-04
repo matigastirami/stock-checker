@@ -1,5 +1,7 @@
+/* eslint-disable import/extensions */
 import parseArgs from './args-parser.js';
-import { checkAndNotifyStock } from './checkerAndNotifier.js';
+import { checkAndNotifyStock, cancelJobs } from './checkerAndNotifier.js';
 import getElementInPageBySelector from './navigator.js';
 
-export { parseArgs, getElementInPageBySelector, checkAndNotifyStock };
+
+export { parseArgs, getElementInPageBySelector, checkAndNotifyStock, cancelJobs };

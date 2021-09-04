@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
-import { CancelablePromise } from 'cancelable-promise';
+import { checkAndNotifyStock, cancelJobs } from '..';
 import * as checkerAndNotifier from '../checkerAndNotifier';
-// import notifyByEmail from '../mailSender';
 
 describe('checkerAndNotifier tests', () => {
   it('Should return the first number present in a given string', () => {
@@ -22,21 +21,24 @@ describe('checkerAndNotifier tests', () => {
   });
 
   // Skipped until I can solve the unresolved promise problem
-  it.skip('Should continue checking every 5 seconds for stock while available is 0', async () => {
-    const getStockSpy = jest.spyOn(checkerAndNotifier, 'getStock');
-
-    const checker = new CancelablePromise(() => checkerAndNotifier
-      .checkAndNotifyStock({
+  it('Should continue checking every 5 seconds for stock while available is 0', async (done) => {
+    const [r1, r2] = Promise.all([
+      checkAndNotifyStock({
         p: `file://${process.cwd()}\\helpers\\__test__\\utils\\test.html`,
         s: '.this_is_a_stock',
-        lmk: 'test@test.com',
+        lmk: 'this_is_a_test@stock-checker.com',
         sch: '0/5 0 0 ? * * *',
-      }));
+      }),
+      () => new Promise((res) => setTimeout(() => {
+        checkerAndNotifier.getStock = jest.fn()
+          .mockImplementationOnce(() => Promise.resolve(1));
 
-    await checker;
+        cancelJobs('Jest');
 
-    setTimeout(() => {
-      expect(getStockSpy).toHaveBeenCalledTimes(0);
-    }, 16000);
+        res(1);
+      }, 11000)),
+    ]);
+
+    console.log(r1, r2);
   });
 });

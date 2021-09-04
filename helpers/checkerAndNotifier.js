@@ -1,7 +1,20 @@
-import { getElementInPageBySelector } from "./";
+import { getElementInPageBySelector } from "./index.js";
 import { scheduleJob, cancelJob } from "node-schedule";
 import notifyByEmail from "./mailSender.js";
-import { DEFAULT_CRON_STRING } from "./constants.js";
+import { CRONS_CANCEL_EVENT, DEFAULT_CRON_STRING } from "./constants.js";
+
+import { EventEmitter } from 'events';
+
+const cancellable = new EventEmitter();
+
+cancellable.on(CRONS_CANCEL_EVENT, (reason) => {
+  console.log(`Scheduled task cancelled. Reason: ${reason || 'No reason specified'}`);
+  cancelJob("stockChecker");
+});
+
+export const cancelJobs = (reason = null) => {
+  cancellable.emit(CRONS_CANCEL_EVENT, reason);
+}
 
 export const getFirstNumberInText = (text) => {
   let rg = new RegExp("\\d+", "gi");
@@ -19,14 +32,18 @@ export const checkAndNotifyStock = async ({ p, s, sch, lmk }) => {
   const rule = sch ?? DEFAULT_CRON_STRING;
   
   scheduleJob("stockChecker", rule, async () => {
-    let stock = await getStock({ p, s });
-  
-    if (stock > 0) {
-      console.log("Available stock");
-      cancelJob("stockChecker"); // name of the scheduler created to stop
-      await notifyByEmail(lmk, `Hi, there is/are ${stock} items in stock for the product you were checking for.`);
-    } else {
-      console.log("No stock");
+    try {
+      let stock = await getStock({ p, s });
+
+      if (stock > 0) {
+        console.log("Available stock");
+        //await notifyByEmail(lmk, `Hi, there is/are ${stock} items in stock for the product you were checking for.`);
+        cancelJobs('Stock found. Stopping process');
+      } else {
+        console.log("No stock");
+      }
+    } catch (error) {
+      console.error("FATAL: ", error); 
     }
   });
 }
